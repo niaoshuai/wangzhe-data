@@ -1,8 +1,8 @@
 import csv
-
 from lxml import html
-
 import requests as requests
+
+import pandas as pd
 
 
 def get_detail(name):
@@ -24,8 +24,7 @@ def get_detail(name):
     return list_data
 
 
-# 按间距中的绿色按钮以运行脚本。
-if __name__ == '__main__':
+def get_data():
     url = "https://db.18183.com/wzry/"
     http_response = requests.get(url)
     response_text = http_response.text
@@ -47,3 +46,17 @@ if __name__ == '__main__':
         csv_write.writerow(list_data)
 
     f.close()
+
+
+def handle_data():
+    # data
+    get_data
+    # 移除重复数据
+    frame = pd.read_csv("csv_英雄.csv")
+    data = frame.drop_duplicates(subset=['英雄名称'], keep='first', inplace=False)
+    data.to_csv("csv_英雄_不重复.csv")
+
+
+# 按间距中的绿色按钮以运行脚本。
+if __name__ == '__main__':
+    handle_data()

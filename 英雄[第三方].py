@@ -14,13 +14,13 @@ def get_detail(name):
     selector = html.etree.HTML(response_text)
     hero_name = selector.xpath('//div[@class="name-box"]/h1/text()')[0]
     list_data.append(hero_name)
-    basic_type= selector.xpath('//div[@class="hero-basicinfo-box fl"]/div[@class="base"]/dl/dd/text()')[0].strip()
+    basic_type = selector.xpath('//div[@class="hero-basicinfo-box fl"]/div[@class="base"]/dl/dd/text()')[0].strip()
     list_data.append(basic_type)
     basic_data_li = selector.xpath('//div[@class="otherinfo-datapanel"]/ul/li')
     for li in basic_data_li:
         pdata_str = li.xpath("./p/text()")[0]
         pdata = pdata_str.split("：")
-        list_data.append(pdata[1])
+        list_data.append(pdata[1].replace('%', ''))
     return list_data
 
 
@@ -37,9 +37,9 @@ if __name__ == '__main__':
     f = open('csv_英雄.csv', 'w', encoding='utf-8')
     csv_write = csv.writer(f)
     w = csv_write.writerow(["英雄名称", "英雄类型",
-                                            '最大生命', '最大法力', '物理攻击', '法术攻击', '物理防御', '物理减伤率', '法术防御', '法术减伤率', '移速',
-                                            '物理护甲穿透', '法术护甲穿透', '攻速加成', '暴击几率',
-                                            '暴击效果', '物理吸血', '法术吸血', '冷却缩减', '攻击范围', '韧性', '生命回复', '法力回复'])
+                            '最大生命', '最大法力', '物理攻击', '法术攻击', '物理防御', '物理减伤率', '法术防御', '法术减伤率', '移速',
+                            '物理护甲穿透', '法术护甲穿透', '攻速加成', '暴击几率',
+                            '暴击效果', '物理吸血', '法术吸血', '冷却缩减', '攻击范围', '韧性', '生命回复', '法力回复'])
     for i in div_people_li:
         item_href = i.xpath('./a/@href')
         list_data = get_detail(

@@ -30,7 +30,7 @@ if __name__ == '__main__':
     response = requests.get(url).json()
 
     # csv 写入
-    f = open('csv_file.csv', 'w', encoding='utf-8')
+    f = open('csv_皮肤.csv', 'w', encoding='utf-8')
     csv_write = csv.writer(f)
     csv_write.writerow(['皮肤名称', '英雄名称', '皮肤描述', '皮肤图像', ])
 

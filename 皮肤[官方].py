@@ -1,4 +1,4 @@
-import csv
+import pandas as pd
 
 from lxml import html
 
@@ -28,15 +28,19 @@ def get_detail(name):
 if __name__ == '__main__':
     url = "https://pvp.qq.com/zlkdatasys/data_zlk_xpflby.json"
     response = requests.get(url).json()
-
-    # csv 写入
-    f = open('csv_皮肤.csv', 'w', encoding='utf-8')
-    csv_write = csv.writer(f)
-    csv_write.writerow(['皮肤名称', '英雄名称', '皮肤描述', '皮肤图像', ])
-
+    datas = []
     for i in response['pcblzlby_c6']:
         img_text, skin_text, hero_text, skin_desc_text = get_detail(str(i['pcblzlbyxqydz_c4']))
         if hero_text != "nil":
-            csv_write.writerow([skin_text, hero_text, skin_desc_text, img_text, ])
+            data = {
+                "皮肤名称": skin_text,
+                "英雄名称": hero_text,
+                "皮肤描述": skin_desc_text,
+                "皮肤图像": img_text
+            }
+            datas.append(data)
 
-    f.close()
+    headers = ['皮肤名称', '英雄名称', '皮肤描述', '皮肤图像']
+
+    df = pd.DataFrame(datas, columns=headers)
+    df.to_csv("csv_皮肤.tsv",header=headers, sep="\t")

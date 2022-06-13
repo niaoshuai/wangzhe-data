@@ -35,9 +35,9 @@ def get_data():
     datas = []
 
     headers = ["英雄名称", "英雄类型",
-              '最大生命', '最大法力', '物理攻击', '法术攻击', '物理防御', '物理减伤率', '法术防御', '法术减伤率', '移速',
-              '物理护甲穿透', '法术护甲穿透', '攻速加成', '暴击几率',
-              '暴击效果', '物理吸血', '法术吸血', '冷却缩减', '攻击范围', '韧性', '生命回复', '法力回复']
+               '最大生命', '最大法力', '物理攻击', '法术攻击', '物理防御', '物理减伤率', '法术防御', '法术减伤率', '移速',
+               '物理护甲穿透', '法术护甲穿透', '攻速加成', '暴击几率',
+               '暴击效果', '物理吸血', '法术吸血', '冷却缩减', '攻击范围', '韧性', '生命回复', '法力回复']
 
     for i in div_people_li:
         item_href = i.xpath('./a/@href')
@@ -47,7 +47,7 @@ def get_data():
 
     df = pd.DataFrame(datas, columns=headers);
     data = df.drop_duplicates(subset=['英雄名称'], keep='first', inplace=False)
-    data.to_csv("csv_英雄.tsv",index=False, sep="\t")
+    data.to_csv("csv_英雄.tsv", index=False, sep="\t")
 
 
 def handle_data():

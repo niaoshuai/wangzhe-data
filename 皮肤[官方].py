@@ -43,4 +43,4 @@ if __name__ == '__main__':
     headers = ['皮肤名称', '英雄名称', '皮肤描述', '皮肤图像']
 
     df = pd.DataFrame(datas, columns=headers)
-    df.to_csv("csv_皮肤.tsv",header=headers, sep="\t")
+    df.to_csv("csv_皮肤.tsv", header=headers, sep="\t")
